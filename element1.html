@@ -1,0 +1,162 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>PYTHON WEBSPIDER</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">HOME</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="generic.html">ESSAYS</a></li>
+								<li><a href="element1.html">PYTHON</a></li>
+								
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>PYTHON WEBSPIDER</h2>
+								<p>话不多说，爬它！</p>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+                                    <section>
+                                        <h3 class="major">开始吧</h3>
+                                        <p>先放一个各位绅士都会喜欢的吧--<b>爬妹子图</b> <p>你是否上网冲浪时总是找不到好图？你是否厌倦了右键保存？这个代码可以帮你一键下载妹子图片至你电脑中。当然这不是万能的，只能爬取下面这个网址。。。还是先放个链接吧  <a href="http://www.meizitu.org/">这就是斯巴达</a>.</p>
+                                        <h4>声明</h4>
+                                        <blockquote>妹子虽好，切忌沉迷，色图岂是想有就有，什么都要付出努力滴</blockquote>
+                                        <h4>代码</h4>
+                                        <pre><code>
+import requests
+import re
+import json
+import random
+
+def get_one_page(url):
+    headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+    }
+    response = requests.get(url, headers = headers)
+    if response.status_code ==200:
+        return response.text
+    return None
+
+
+def main():
+    for i in range(1,56):
+        url = 'http://www.meizitu.org/page/'+str(i)
+        html = get_one_page(url)
+    # print(html)
+        parse_one_page(html)
+        print("Downloading image from the %d page"%i)
+    for item in parse_one_page(html):
+        print(item)
+        write_to_file(item)
+
+def parse_one_page(html):
+    pattern = re.compile('img src="(.*?)"', re.S)
+    items = re.findall(pattern, html)
+    # write_to_file(items)
+    # print(len(items))
+    for img_url in items:
+        s  = random.randint(0,1111111111111)
+        with open("heiheihei/"+str(s)+".jpg", 'wb') as file:
+            file.write(requests.get(img_url).content)
+
+def write_to_file(content):
+    with open('heihei.txt', 'a+', encoding='utf-8')as f:
+        # print(type(json.dumps(content)))
+        f.write(json.dumps(content, ensure_ascii=False)+'\n')
+
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+                                        <section>
+                                            <h3 class="major">效果图</h3>
+                                          
+                                            <div class="box alt">
+                                                <div class="row gtr-uniform">
+                                                    <div class="col-12"><span class="image fit"><img src="images/妹子.jpg" alt="" /></span></div>
+                                                    
+                                                </div>
+                                        
+                                        </section>
+                                        <h3 class="major">结束语</h3>
+                                        <p>我写完这段代码后便洗洗睡了，妹子哪有编程好玩。。。<p>
+                                    </section>
+                                    <section class="features">
+                                        <article>
+                                            <a href="#" class="image"><img src="images/IMG_20190706_141657.jpg" alt="" /></a>
+                                            <h3 class="major">编程之路</h3>
+                                            <p>不问收获，只问耕耘。不为圣贤，便为禽兽。</p>
+                                            <a href="#" class="special">Learn more</a>
+                                        </article>
+                                        <article>
+                                            <a href="#" class="image"><img src="images/IMG_20190706_141622.jpg" alt="" /></a>
+                                            <h3 class="major">书籍阅读</h3>
+                                            <p>慢慢走，欣赏啊。</p>
+                                            <a href="#" class="special">Learn more</a>
+                                        </article>
+                                        <article>
+                                            <a href="#" class="image"><img src="images/41C5816F0612EED5DD9A6A69280A92B0.jpg" alt="" /></a>
+                                            <h3 class="major">日常随笔</h3>
+                                            <p>就是日常的琐事。</p>
+                                            <a href="#" class="special">Learn more</a>
+                                        </article>
+                                        <article>
+                                            <a href="#" class="image"><img src="images/293D0F1D91AD611B19A6A6B4759D1C36.jpg" alt="" /></a>
+                                            <h3 class="major">同好会</h3>
+                                            <p>分享一些我喜欢的东西。。。</p>
+                                            <a href="#" class="special">Learn more</a>
+                                        </article>
+                                    </section>
+									
+
+									
+
+	
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
